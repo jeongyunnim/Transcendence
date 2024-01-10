@@ -1,5 +1,5 @@
 # Transcendence
-메모 This project is about doing something you've never one before. Remind yourself the beginning of your journey in computer science. Look at you now. Time to shine!
+This project is about doing something you've never one before. Remind yourself the beginning of your journey in computer science. Look at you now. Time to shine!
 
 # Essential Points
 This project is a complex undertaking, requiring decision-making within the specified constraints. You have some flexibility in implementing certain modules, and it is left to you discretion **within the scope of the subject**. All your choices must be justifiable.
