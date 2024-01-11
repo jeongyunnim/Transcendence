@@ -1,0 +1,27 @@
+version: '3'
+
+services:
+
+  django:
+    container_name: django
+    image: django
+    pull_policy: never
+    build: ./Django
+    volumes:
+      - dj-vol:/var/www
+    ports:
+      - "8000:8000"
+    networks:
+      - jeseo-net
+
+networks:
+  jeseo-net:
+    driver: bridge
+
+volumes:
+  dj-vol:
+    driver: local
+    driver_opts:
+      o: bind
+      type: none
+      device: ${VOL_PATH}
