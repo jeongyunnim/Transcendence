@@ -4,7 +4,8 @@ DOCKER_VOLUME := $(shell docker volume ls -q)
 PWD := $(shell pwd)
 
 all:
-	sed -i '' 's|^\(VOL_PATH\).*|VOL_PATH=$(PWD)/srcs/Django/Django-vol|' "./srcs/.env"
+	sed -i '' 's|^\(FE_VOL_PATH\).*|FE_VOL_PATH=$(PWD)/srcs/frontend/frontend-vol|' './srcs/.env'
+	sed -i '' 's|^\(FE_DB_VOL_PATH\).*|FE_DB_VOL_PATH=$(PWD)/srcs/frontend/frontend-db/frontend-db-vol|' './srcs/.env'
 	docker compose -f srcs/compose.yaml up -d
 
 up:

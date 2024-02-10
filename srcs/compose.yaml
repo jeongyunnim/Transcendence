@@ -18,7 +18,7 @@ services:
     container_name: frontend-db
     image: postgresql
     pull_policy: never
-    build: ./frontend-db
+    build: ./frontend/frontend-db
     volumes:
       - fe-db-vol:/var/www
     expose:
