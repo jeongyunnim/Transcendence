@@ -2,15 +2,27 @@ version: '3'
 
 services:
 
-  django:
-    container_name: django
+  frontend:
+    container_name: frontend
     image: django
     pull_policy: never
-    build: ./Django
+    build: ./frontend
     volumes:
-      - dj-vol:/var/www
+      - fe-vol:/var/www
     ports:
       - "8000:8000"
+    networks:
+      - jeseo-net
+
+  frontend-db:
+    container_name: frontend-db
+    image: postgresql
+    pull_policy: never
+    build: ./frontend-db
+    volumes:
+      - fe-db-vol:/var/www
+    expose:
+      - "5432"
     networks:
       - jeseo-net
 
@@ -19,9 +31,17 @@ networks:
     driver: bridge
 
 volumes:
-  dj-vol:
+  fe-vol:
     driver: local
     driver_opts:
       o: bind
       type: none
-      device: ${VOL_PATH}
+      device: ${FE_VOL_PATH}
+
+  fe-db-vol:
+    driver: local
+    driver_opts:
+      o: bind
+      type: none
+      device: ${FE_DB_VOL_PATH}
+      
