@@ -4,7 +4,13 @@ RUN mkdir -p /var/www/django
 
 WORKDIR /var/www/django
 
-RUN pip install --upgrade pip &&\
-    pip install django djangorestframework django-filter
+RUN pip install --upgrade pip \
+    pip install django \
+    django-environ \
+    djangorestframework \
+    django-filter \
+    psycopg2-binary
 
-CMD [ "python", "/var/www/django/transcendence/manage.py", "runserver", "0.0.0.0:8000" ]
+COPY ./tools/srcs /var/www/django/
+
+CMD [ "python", "/var/www/django/manage.py", "runserver", "0.0.0.0:8000" ]
