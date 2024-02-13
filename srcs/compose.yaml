@@ -20,7 +20,11 @@ services:
 
   frontend_db:
     container_name: frontend_db
-    image: postgresql:alpine3.18
+    image: postgres:alpine3.18
+    restart: always
+    environment:
+      POSTGRES_USER: ${FE_DB_USER}
+      POSTGRES_PASSWORD: ${FE_DB_PW}
     # pull_policy: never
     # build: 
     #   context: ./frontend/frontend_db

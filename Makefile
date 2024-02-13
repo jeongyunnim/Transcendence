@@ -21,10 +21,11 @@ re: fclean
 
 fclean:
 	$(if $(DOCKER_ID), docker rm -f $(DOCKER_ID))
-	$(if $(DOCKER_IMAGE_ID), docker rmi $(DOCKER_IMAGE_ID))
 	$(if $(DOCKER_VOLUME), docker volume rm $(DOCKER_VOLUME))
-	docker system prune -af
+	docker rmi django
 	rm -rf $(FE_DB_VOL_PATH)/*
+# docker system prune -af
+# $(if $(DOCKER_IMAGE_ID), docker rmi $(DOCKER_IMAGE_ID))
 
 django:
 	docker compose -f srcs/compose.yaml run -it django sh
