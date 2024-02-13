@@ -11,6 +11,6 @@ RUN pip install --upgrade pip \
     django-filter \
     psycopg2-binary
 
-COPY ./tools/srcs /var/www/django/
+# COPY ./tools/srcs /var/www/django/
 
 CMD [ "python", "/var/www/django/manage.py", "runserver", "0.0.0.0:8000" ]

@@ -13,20 +13,22 @@ services:
       - frontend_db
     ports:
       - "8000:8000"
+    volumes:
+      - fe_vol:/var/www/django/
     networks:
       - jeseo_net
 
   frontend_db:
     container_name: frontend_db
-    image: postgresql
-    pull_policy: never
-    build: 
-      context: ./frontend/frontend_db
-      args:
-        - FE_DB=${FE_DB}
-        - FE_DB_HOST=${FE_DB_HOST}
-        - FE_DB_USER=${FE_DB_USER}
-        - FE_DB_PW=${FE_DB_PW}
+    image: postgresql:alpine3.18
+    # pull_policy: never
+    # build: 
+    #   context: ./frontend/frontend_db
+    #   args:
+    #     - FE_DB=${FE_DB}
+    #     - FE_DB_HOST=${FE_DB_HOST}
+    #     - FE_DB_USER=${FE_DB_USER}
+    #     - FE_DB_PW=${FE_DB_PW}
     volumes:
       - fe_db_vol:/var/lib/postgresql/data
     expose:
@@ -47,3 +49,9 @@ volumes:
     #   type: none
     #   device: ${FE_DB_VOL_PATH}
       
+  fe_vol:
+    driver: local
+    driver_opts:
+      o: bind
+      type: none
+      device: ${FE_VOL_PATH}

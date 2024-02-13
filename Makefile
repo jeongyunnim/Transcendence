@@ -2,10 +2,12 @@ DOCKER_ID := $(shell docker ps -aq)
 DOCKER_IMAGE_ID := $(shell docker images -q)
 DOCKER_VOLUME := $(shell docker volume ls -q)
 PWD := $(shell pwd)
+FE_VOL_PATH := $(PWD)/srcs/frontend/tools/srcs
 FE_DB_VOL_PATH := $(PWD)/srcs/frontend/frontend_db/frontend_db_vol
 
 all:
 	sed -i '' 's|^\(FE_DB_VOL_PATH\).*|FE_DB_VOL_PATH=$(FE_DB_VOL_PATH)|' './srcs/.env'
+	sed -i '' 's|^\(FE_VOL_PATH\).*|FE_VOL_PATH=$(FE_VOL_PATH)|' './srcs/.env'
 	docker compose -f srcs/compose.yaml up -d
 
 up:

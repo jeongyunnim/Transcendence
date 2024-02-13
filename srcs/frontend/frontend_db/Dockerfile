@@ -19,7 +19,6 @@ RUN pg_ctl initdb -D /var/lib/postgresql/data &&\
 
 RUN pg_ctl start &&\
 	psql -U postgres -c "CREATE DATABASE $FE_DB;" && \
-    psql -U postgres -d $FE_DB -c "CREATE TABLE $FE_DB (id SERIAL PRIMARY KEY, name VARCHAR(50));" && \
     psql -U postgres -c "CREATE USER $FE_DB_USER WITH PASSWORD '$FE_DB_PW';" && \
     psql -U postgres -c "GRANT ALL PRIVILEGES ON DATABASE $FE_DB TO $FE_DB_USER;" &&\
 	pg_ctl stop
