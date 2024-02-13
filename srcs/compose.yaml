@@ -41,9 +41,9 @@ networks:
 volumes:
 
   fe_db_vol:
-    driver: local
-    driver_opts:
-      o: bind
-      type: none
-      device: ${FE_DB_VOL_PATH}
+    # driver: local
+    # driver_opts:
+    #   o: bind
+    #   type: none
+    #   device: ${FE_DB_VOL_PATH}
       
