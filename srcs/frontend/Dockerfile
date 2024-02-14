@@ -9,7 +9,11 @@ RUN pip install --upgrade pip \
     django-environ \
     djangorestframework \
     django-filter \
-    psycopg2-binary
+    psycopg2-binary \
+    poetry \
+    django-extensions \
+    drf-spectacular
+
 
 # COPY ./tools/srcs /var/www/django/
 
