@@ -1,15 +1,10 @@
 #!/bin/sh
 
-if [ ! -d "~/.pg_service.conf" ]; then
-    cat << EOF > .pg_service.conf
-[mydb]
-host=${FE_DB}
-dbname=${FE_DB}
-port=${FE_DB_PORT}
-user=${FE_DB_USER}
-EOF
 
-if [ ! -d "~/.my_pgpass" ]; then
-    cat << EOF > .pg_service.conf
-localhost:5432:NAME:USER:PASSWORD
-EOF
+
+python manage.py makemigrations
+
+python manage.py migrate
+
+# python manage.py runsslserver --certificate /etc/ssl/private/domain.crt --key /etc/ssl/private/domain.key 0:8000
+python manage.py runserver 0:8000

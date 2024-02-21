@@ -7,6 +7,10 @@ ARG DOMAIN=domain
 
 WORKDIR /var/www/django
 
+COPY ./tools/run_frontend.sh /home/run_frontend.sh
+
+RUN chmod 755 /home/run_frontend.sh
+
 RUN apk update && \
     apk --no-cache add \
     openssl \
@@ -16,7 +20,7 @@ RUN pip install --upgrade pip \
     pip install django \
     django-environ \
     djangorestframework \
-    djangorestframework-jwt \
+    djangorestframework-simplejwt \
     django-sslserver \
     django-filter \
     psycopg2-binary \
@@ -29,6 +33,4 @@ RUN openssl genrsa -out ${SSL_PATH}/${DOMAIN}.key 2048 && \
     -subj "/C=KR/ST=Seoul/L=Gaepodong/O=42seoul/OU=Cadet/CN=${DOMAIN}" && \
     openssl x509 -req -days 1000 -in ${SSL_PATH}/${DOMAIN}.crt -signkey ${SSL_PATH}/${DOMAIN}.key -out ${SSL_PATH}/${DOMAIN}.crt
 
-# COPY ./tools/srcs /var/www/django/
-
-CMD [ "python", "/var/www/django/manage.py", "runserver", "0.0.0.0:8000" ]
+ENTRYPOINT ["dumb-init", "--", "/home/run_frontend.sh" ]
