@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 
 from pathlib import Path
 import environ
+import datetime
 
 env = environ.Env()
 environ.Env.read_env()
@@ -42,6 +43,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'sslserver',
 ]
 
 MIDDLEWARE = [
@@ -129,3 +131,20 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+REST_FRAMEWORK = {
+	'DEFAULT_PERMISSION_CLASSES':(
+		'rest_framework.permissions.IsAuthenticated',
+	),
+	'DEFAULT_AUTHENTICATION_CLASSES':(
+		'rest_framework_jwt.authentication.JSONWebTokenAuthentication',
+	),
+}
+
+JWT_AUTH = {
+	'JWT_SECRET_KEY': SECRET_KEY,
+	'JWT_ALGORITHM': 'HS256',
+	'JWT_ALLOW_REFRESH': True,
+	'JWT_EXPIRATION_DELTA': datetime.timedelta(days=7),
+	'JWT_REFRESH_EXPRIATION_DELTA': datetime.timedelta(days=7),
+}
