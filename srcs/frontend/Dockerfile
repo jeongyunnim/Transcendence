@@ -24,7 +24,6 @@ RUN pip install --upgrade pip \
     django-sslserver \
     django-filter \
     psycopg2-binary \
-    poetry \
     django-extensions \
     drf-spectacular
 
