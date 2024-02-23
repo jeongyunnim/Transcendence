@@ -10,3 +10,4 @@ class User(models.Model):
     def __str__(self):
         return self.username
         #문자열 반환
+    

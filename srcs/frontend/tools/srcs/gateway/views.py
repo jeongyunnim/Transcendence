@@ -9,7 +9,7 @@ def signup(request):
         return render(request, 'signup.html')
     elif request.method =='POST':
         username = request.POST.get('username',None)
-        useremail = request.POST.get('useremail',None) #새로 추가
+        useremail = request.POST.get('useremail',None)
         password = request.POST.get('password',None)
         re_password = request.POST.get('re-password',None)
 
