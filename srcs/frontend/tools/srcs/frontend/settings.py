@@ -43,16 +43,22 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    
+    'user.apps.UserConofig',
 ]
 
 # https://velog.io/@kjyeon1101/DRF-JWT-%EC%9D%B8%EC%A6%9D%EC%9D%84-%EC%82%AC%EC%9A%A9%ED%95%9C-%ED%9A%8C%EC%9B%90%EA%B0%80%EC%9E%85%EB%A1%9C%EA%B7%B8%EC%9D%B8
+AUTH_USER_MODEL = 'user.User'
+
 REST_FRAMEWORK = {
     # API에 접근할 때 access_token을 포함하여 유효한 유저만 접근할 수 있도록 하는 것
     'DEFAULT_PERMISSION_CLASSES': (
-        'rest_framework.permissions.IsAuthenticated',
+        # 'rest_framework.permissions.IsAuthenticated', # 인증된 사용자만 접근 가능
+        'rest_framework.permissions.AllowAny', # 누구나 접근 가능, api에 일일이 접근 권한 설정을 해주지 않아도 됨
     ),
     # API가 호출되었을 때 session, token을 인증할 클래스를 정의한다.
     'DEFAULT_AUTHENTICATION_CLASSES': (
+        # 'auth.authenticate.SafeJWTAuthentication',
         'rest_framework_simplejwt.authentication.JWTAuthentication',
     ),
 }
