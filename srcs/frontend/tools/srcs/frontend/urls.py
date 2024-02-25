@@ -21,6 +21,11 @@ from rest_framework_simplejwt.views import (
     TokenVerifyView,
     TokenRefreshView,
 )
+from rest_framework import routers
+from user.views import *
+
+router = routers.DefaultRouter()
+router.register('list', UserViewSet)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -28,5 +33,6 @@ urlpatterns = [
     # OAuth를 통해 인증받은 유저는 어떻게 처리해야 하나?
     path('api/token/verify/', TokenVerifyView.as_view(), name='token_verify'),
     path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
-    path('api/gateway/', include('gateway.urls'))
+    path('api/gateway/', include('gateway.urls')),
+    path('', include(router.urls))
 ]
