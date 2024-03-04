@@ -23,16 +23,11 @@ services:
     image: postgres:alpine3.18
     restart: always
     environment:
+    # todo POSTGRES_DB 연결 안 돼서 User 이름과 동일하게 설정 함.
+    # https://hub.docker.com/_/postgres
       POSTGRES_USER: ${FE_DB_USER}
       POSTGRES_PASSWORD: ${FE_DB_PW}
-    # pull_policy: never
-    # build: 
-    #   context: ./frontend/frontend_db
-    #   args:
-    #     - FE_DB=${FE_DB}
-    #     - FE_DB_HOST=${FE_DB_HOST}
-    #     - FE_DB_USER=${FE_DB_USER}
-    #     - FE_DB_PW=${FE_DB_PW}
+
     volumes:
       - fe_db_vol:/var/lib/postgresql/data
     expose:
@@ -45,14 +40,9 @@ networks:
     driver: bridge
 
 volumes:
-
+# 볼륨
   fe_db_vol:
-    # driver: local
-    # driver_opts:
-    #   o: bind
-    #   type: none
-    #   device: ${FE_DB_VOL_PATH}
-      
+# 바인드 마운트
   fe_vol:
     driver: local
     driver_opts:

@@ -33,8 +33,8 @@ class UserManager(BaseUserManager):
         superuser.save(using=self._db)
         return superuser
 
-# AbstractBaseUser를 상속하여 유저 커스텀
 # todo 두 개의 클래스를 상속하는 것에 대해 알아보자
+# AbstractBaseUser를 상속하여 유저 커스텀
 class User(AbstractBaseUser, PermissionsMixin):
     email = models.EmailField(max_length=30, unique=True, null=False, blank=False)
     is_superuser = models.BooleanField(default=False)
